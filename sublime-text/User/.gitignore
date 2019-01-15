@@ -1,0 +1,8 @@
+Package Control.cache/
+Package Control.merged-ca-bundle
+Package Control.system-ca-bundle
+Package Control.user-ca-bundle
+Package Control.last-run
+oscrypto-ca-bundle.crt
+*.sublime-workspace
+.SublimeREPLHistory
