@@ -60,7 +60,6 @@ defaults write NSGlobalDomain com.apple.springing.delay -float 0
 # Safari & WebKit                                                             #
 ###############################################################################
 
-
 # Show the full URL in the address bar (note: this still hides the scheme)
 defaults write ~/Library/Containers/com.apple.Safari/Data/Library/Preferences/com.apple.Safari ShowFullURLInSmartSearchField -bool true
 
@@ -86,7 +85,6 @@ defaults write ~/Library/Containers/com.apple.Safari/Data/Library/Preferences/co
 
 # Set Safari’s home page to `about:blank` for faster loading
 # defaults write ~/Library/Containers/com.apple.Safari/Data/Library/Preferences/com.apple.Safari HomePage -string "about:blank"
-
 
 ###############################################################################
 # Dock, Dashboard                                                             #
@@ -192,7 +190,6 @@ defaults write NSGlobalDomain AppleHighlightColor -string "0.847059 0.847059 0.8
 # Possible values: `WhenScrolling`, `Automatic` and `Always`
 defaults write NSGlobalDomain AppleShowScrollBars -string "WhenScrolling"
 
-
 ###############################################################################
 # Other stuff                                                                 #
 ###############################################################################
@@ -234,6 +231,9 @@ defaults write NSGlobalDomain NSCloseAlwaysConfirmsChanges -bool true
 
 # Set alert sound
 defaults write NSGlobalDomain com.apple.sound.beep.sound -string "/System/Library/Sounds/Funk.aiff"
+
+# Play feedback when volume is changed
+defaults write NSGlobalDomain com.apple.sound.beep.feedback -int 1
 
 # Set date format in menubar
 defaults write "com.apple.menuextra.clock" DateFormat -string "EEE MMM d  h:mm a"
