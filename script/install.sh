@@ -52,6 +52,7 @@ IS_OH_MY_ZSH_INSTALLED=false
 IS_NODE_INSTALLED=false
 IS_VSCODE_INSTALLED=false
 IS_ITERM_INSTALLED=false
+IS_SUBLIME_TEXT_INSTALLED=false
 
 clear
 
@@ -312,6 +313,29 @@ fi
 # fi
 
 #----------------------------
+# Sublime Text
+#----------------------------
+
+if [ -d /Applications/Sublime\ Text.app/ ]; then
+  IS_SUBLIME_TEXT_INSTALLED=true
+fi
+
+if $IS_SUBLIME_TEXT_INSTALLED; then
+  read -p "${ARROW_YELLOW} Install Sublime Text settings? [y/n]: "
+
+  if [ "$REPLY" == "y" ]; then
+    if [ -d ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User ]; then
+      echo "${ARROW} Installing Sublime Text settings..."
+      rm -rf ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
+      ln -s $PWD/sublime-text/User ~/Library/Application\ Support/Sublime\ Text\ 3/Packages
+    else
+      echo "${RED}${BOLD}Note:$DEFAULT You need to open Sublime Text at least once before installing the settings."
+      echo "While you are there, install the Package Control for better results. Then, re-apply this script!"
+    fi
+  fi
+fi
+
+#----------------------------
 # Spectacle shortcuts
 #----------------------------
 
@@ -323,7 +347,7 @@ if $IS_SPECTACLE_INSTALLED; then
   read -p "${ARROW_YELLOW} Configure Spectacle shortcuts? [y/n]: "
 
   if [ "$REPLY" == "y" ]; then
-    echo "${ARROW} Configuring Spectacle shotrcuts..."
+    echo "${ARROW} Configuring Spectacle shortcuts..."
     cp -r spectacle.json ~/Library/Application\ Support/Spectacle/Shortcuts.json 2> /dev/null
   fi
 fi
