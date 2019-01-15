@@ -5,3 +5,18 @@
 	editor = editor
 [credential]
 	helper = osxkeychain
+[color]
+  ui = true
+  diff = auto
+  status = auto
+  branch = auto
+  interactive = auto
+  pager = true
+[color "branch"]
+  current = green reverse
+[color "diff"]
+  meta = yellow
+[color "status"]
+  untracked = cyan
+[pager]
+  branch = false
