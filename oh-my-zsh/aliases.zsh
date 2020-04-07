@@ -12,3 +12,4 @@ alias greb="git fetch && git rebase -i origin/master"
 alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
 alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
 
+alias cop="bundle exec rubocop"
