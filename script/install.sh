@@ -124,7 +124,7 @@ if [ "$REPLY" == "y" ]; then
   read -p "${ARROW_YELLOW} Please enter Git e-mail: " email
   read -p "${ARROW_YELLOW} Please enter Git editor: " editor
   echo "${ARROW} Creating ~/.gitconfig file..."
-  
+
   cp ~/.gitconfig ~/.gitconfig.mac_setup_backup 2> /dev/null
   cp .gitconfig ~
   sed -i -e "s/First Last/$username/g" ~/.gitconfig
@@ -171,7 +171,7 @@ if $IS_HOMEBREW_INSTALLED; then
       if [ "$REPLY" == "y" ]; then
       SELECTED_CASK_APPLICATIONS+=("$item")
       fi
-    done  
+    done
 
     if [ ${#SELECTED_CASK_APPLICATIONS[@]} -gt 0 ]; then
       echo "${ARROW} Installing applications via Homebrew Cask..."
@@ -231,7 +231,7 @@ if $IS_ITERM_INSTALLED; then
   fi
 fi
 
-# TEMPORARILY DISABLED 
+# TEMPORARILY DISABLED
 #----------------------------
 # Node Version Manager
 #----------------------------
@@ -254,7 +254,7 @@ fi
 #   fi
 # fi
 
-# TEMPORARILY DISABLED 
+# TEMPORARILY DISABLED
 #----------------------------
 # VS Code extensions
 #----------------------------
@@ -272,7 +272,7 @@ fi
 #       if [ "$REPLY" == "y" ]; then
 #       SELECTED_VSCODE_EXTENSIONS+=("$item")
 #       fi
-#     done  
+#     done
 
 #     if [ ${#SELECTED_VSCODE_EXTENSIONS[@]} -gt 0 ]; then
 #       echo "${ARROW} Installing Visual Studio Code extensions..."
@@ -284,7 +284,7 @@ fi
 #   fi
 # fi
 
-# TEMPORARILY DISABLED 
+# TEMPORARILY DISABLED
 #----------------------------
 # VS Code settings
 #----------------------------
@@ -298,7 +298,7 @@ fi
 #   fi
 # fi
 
-# TEMPORARILY DISABLED 
+# TEMPORARILY DISABLED
 #----------------------------
 # VS Code snippets
 #----------------------------
@@ -358,7 +358,7 @@ fi
 
 if [[ $(sudo firmwarepasswd -check) =~ "Password Enabled: Yes" ]]; then
   echo "${ARROW_GREEN} Firmware password is already set up!"
-else 
+else
   read -p "${ARROW_YELLOW} Set up firmware password? [y/n]: "
 
   if [ "$REPLY" == "y" ]; then
@@ -378,6 +378,18 @@ if [ "$REPLY" == "y" ]; then
   sudo scutil --set ComputerName $uservar
   sudo scutil --set HostName $uservar
   sudo scutil --set LocalHostName $uservar
+fi
+
+#----------------------------
+# Enable Mac Startup Chime
+#----------------------------
+
+read -p "${ARROW_YELLOW} Enable Mac Startup Chime? [y/n]: "
+
+if [ "$REPLY" == "y" ]; then
+  echo "${ARROW} Enabling Mac Startup Chime..."
+
+  sudo nvram StartupMute=%00
 fi
 
 #----------------------------
