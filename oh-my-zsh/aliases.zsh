@@ -1,6 +1,6 @@
 # zsh / oh-my-zsh
-alias zshconfig="subl ~/.zshrc"
-alias ohmyzsh="subl ~/.oh-my-zsh"
+alias zshconfig="code ~/.zshrc"
+alias ohmyzsh="code ~/.oh-my-zsh"
 alias reload!="source ~/.zshrc"
 
 alias gamd="git commit -a --amend --reuse-message=HEAD"
@@ -12,3 +12,4 @@ alias greb="git fetch && git rebase -i origin/master"
 alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
 alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
 
+alias cop="bundle exec rubocop"
