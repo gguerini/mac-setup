@@ -7,6 +7,10 @@
 #
 # Run ./defaults.sh and you'll be good to go.
 
+# Close any open System Preferences panes, to prevent them from overriding
+# settings we’re about to change
+osascript -e 'tell application "System Preferences" to quit'
+
 ###############################################################################
 # Finder                                                                      #
 ###############################################################################
@@ -60,31 +64,24 @@ defaults write NSGlobalDomain com.apple.springing.delay -float 0
 # Safari & WebKit                                                             #
 ###############################################################################
 
-# Show the full URL in the address bar (note: this still hides the scheme)
-defaults write ~/Library/Containers/com.apple.Safari/Data/Library/Preferences/com.apple.Safari ShowFullURLInSmartSearchField -bool true
+# Show favorites bar in Safari by default
+defaults write com.apple.Safari ShowFavoritesBar -bool true
 
-# Show website icons in tabs
-defaults write ~/Library/Containers/com.apple.Safari/Data/Library/Preferences/com.apple.Safari ShowIconsInTabs -bool true
+# Show the full URL in the address bar (note: this still hides the scheme)
+defaults write com.apple.Safari ShowFullURLInSmartSearchField -bool true
 
 # Hide Safari’s sidebar in Top Sites
-defaults write ~/Library/Containers/com.apple.Safari/Data/Library/Preferences/com.apple.Safari ShowSidebarInTopSites -bool false
+defaults write com.apple.Safari ShowSidebarInTopSites -bool false
 
 # Enable Safari’s debug menu
-defaults write ~/Library/Containers/com.apple.Safari/Data/Library/Preferences/com.apple.Safari IncludeInternalDebugMenu -bool true
+defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
 
 # Shoe Safari’s status bar
-defaults write ~/Library/Containers/com.apple.Safari/Data/Library/Preferences/com.apple.Safari ShowOverlayStatusBar -bool true
+defaults write com.apple.Safari ShowOverlayStatusBar -bool true
 
 # Enable the Develop menu and the Web Inspector in Safari
-defaults write ~/Library/Containers/com.apple.Safari/Data/Library/Preferences/com.apple.Safari IncludeDevelopMenu -bool true
-defaults write ~/Library/Containers/com.apple.Safari/Data/Library/Preferences/com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
-defaults write ~/Library/Containers/com.apple.Safari/Data/Library/Preferences/com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true
-
-# Ask websites not to track
-defaults write ~/Library/Containers/com.apple.Safari/Data/Library/Preferences/com.apple.Safari SendDoNotTrackHTTPHeader -bool true
-
-# Set Safari’s home page to `about:blank` for faster loading
-# defaults write ~/Library/Containers/com.apple.Safari/Data/Library/Preferences/com.apple.Safari HomePage -string "about:blank"
+defaults write com.apple.Safari IncludeDevelopMenu -bool true
+defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
 
 ###############################################################################
 # Dock, Dashboard                                                             #
@@ -205,13 +202,13 @@ defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
 
-# File save, save to disk by default rather than to iCloud 
+# File save, save to disk by default rather than to iCloud
 defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
 
 # Disable opening and closing window animation
 defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -bool false
 
-# Text, spell checker automatically identifies languages 
+# Text, spell checker automatically identifies languages
 defaults write NSGlobalDomain NSSpellCheckerAutomaticallyIdentifiesLanguages -bool true
 
 # Use plain text mode for new TextEdit documents
@@ -221,12 +218,12 @@ defaults write com.apple.TextEdit RichText -int 0
 defaults write com.apple.dock ResetLaunchPad -bool true
 
 # Show battery percentage in Menu Bar
-defaults write com.apple.menuextra.battery ShowPercent YES
+# defaults write com.apple.menuextra.battery ShowPercent YES
 
 # Close windows then quitting an app
 defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool true
 
-# Ask to kepp change when closing documents
+# Ask to keep change when closing documents
 defaults write NSGlobalDomain NSCloseAlwaysConfirmsChanges -bool true
 
 # Set alert sound
