@@ -1,29 +1,31 @@
-brew 'git'
-brew 'mas'
+brew "mas"
 
-cask 'appcleaner'
-cask 'background-music'
-cask 'cyberduck'
-cask 'firefox'
-cask 'flux'
-cask 'fork'
-cask 'google-chrome'
-cask 'gpg-suite'
-cask 'keepingyouawake'
-cask 'keka'
-cask 'mamp'
-cask 'opera'
-cask 'postman'
-cask 'sequel-pro'
-cask 'skype'
-cask 'slack'
-cask 'spectacle'
-cask 'transmission'
-cask 'tunnelblick'
-cask 'visual-studio-code'
-cask 'vlc'
+cask "1password"
+cask "alfred"
+cask "android-file-transfer"
+cask "appcleaner"
+cask "calibre"
+cask "firefox"
+cask "github"
+cask "google-chrome"
+cask "imageoptim"
+cask "insomnia"
+cask "iterm2"
+cask "licecap"
+cask "logitech-options"
+cask "postico"
+cask "rectangle"
+cask "sequel-pro"
+cask "slack"
+cask "transmission"
+cask "visual-studio-code"
+cask "vlc"
+cask "whatsapp"
+cask "xbar"
 
-mas "iMovie", id: 408981434
-mas "Numbers", id: 409203825
-mas "Pages", id: 409201541
+mas "Bumpr", id: 1166066070
+mas "GIPHY", id: 668208984
+mas "Things", id: 904280696
+mas "Wipr", id: 1320666476
+mas "Vinegar", id: 1591303229
 mas "Xcode", id: 497799835
