@@ -36,7 +36,7 @@
   cob = checkout -b
   del = branch -d
   delete = branch -D
-  reb = !git fetch && git rebase -i origin/master
+  reb = !git fetch && git rebase -i origin/main
   ren =  "!f() { git branch -m ${2} ${1}; }; f"
   up = !git fetch origin && git pull --rebase --prune
   cm = !git add -A && git commit
