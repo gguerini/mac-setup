@@ -82,7 +82,7 @@ else
 
   if [[ "$REPLY" == "y" ]]; then
     echo "${ARROW} Installing Homebrew..."
-    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
     IS_HOMEBREW_INSTALLED=true
   fi
@@ -169,19 +169,6 @@ if $IS_HOMEBREW_INSTALLED; then
   fi
 fi
 
-#----------------------------
-# rbenv & ruby-build
-#----------------------------
-
-if $IS_HOMEBREW_INSTALLED; then
-  echo -n "${ARROW_YELLOW} Install rbenv & ruby-build via Homebrew? [y/n]: "
-  read REPLY
-
-  if [[ "$REPLY" == "y" ]]; then
-    echo "${ARROW} Installing rbenv & ruby-build..."
-    brew install rbenv ruby-build
-  fi
-fi
 
 #----------------------------
 # asdf & ruby-build
@@ -287,21 +274,6 @@ if $IS_RECTANGLE_INSTALLED; then
 fi
 
 #----------------------------
-# Firmware password
-#----------------------------
-
-if [[ $(sudo firmwarepasswd -check) =~ "Password Enabled: Yes" ]]; then
-  echo "${ARROW_GREEN} Firmware password is already set up!"
-else
-  echo -n "${ARROW_YELLOW} Set up firmware password? [y/n]: "
-  read REPLY
-
-  if [[ "$REPLY" == "y" ]]; then
-    sudo firmwarepasswd -setpasswd -setmode command
-  fi
-fi
-
-#----------------------------
 # Computer name
 #----------------------------
 
@@ -309,25 +281,25 @@ echo -n "${ARROW_YELLOW} Set computer name? [y/n]: "
 read REPLY
 
 if [[ "$REPLY" == "y" ]]; then
-  echo -n "${ARROW_YELLOW} Please enter computer name: " uservar
+  echo -n "${ARROW_YELLOW} Please enter computer name: "
   read uservar
 
-  sudo scutil --set ComputerName $uservar
-  sudo scutil --set HostName $uservar
-  sudo scutil --set LocalHostName $uservar
+  sudo scutil --set ComputerName "$uservar"
 fi
 
 #----------------------------
-# Enable Mac Startup Chime
+# Host name
 #----------------------------
 
-echo -n "${ARROW_YELLOW} Enable Mac Startup Chime? [y/n]: "
+echo -n "${ARROW_YELLOW} Set host name? [y/n]: "
 read REPLY
 
 if [[ "$REPLY" == "y" ]]; then
-  echo "${ARROW} Enabling Mac Startup Chime..."
+  echo -n "${ARROW_YELLOW} Please enter host name (avoid special characters, space, etc.): "
+  read uservar
 
-  sudo nvram StartupMute=%00
+  sudo scutil --set HostName "$uservar"
+  sudo scutil --set LocalHostName "$uservar"
 fi
 
 #----------------------------
