@@ -1,4 +1,0 @@
-[
-	{ "keys": ["super+t"], "command": "goto_definition" },
-	{ "keys": ["super+g"], "command": "jump_back" },
-]

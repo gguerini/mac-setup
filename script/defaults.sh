@@ -1,9 +1,5 @@
 # Sets reasonable OS X defaults.
-#
-# Or, in other words, set shit how I like in OS X.
-#
-# The original idea (and a couple settings) were grabbed from:
-#   https://github.com/mathiasbynens/dotfiles/blob/master/.osx
+# https://macos-defaults.com/
 #
 # Run ./defaults.sh and you'll be good to go.
 
@@ -21,14 +17,8 @@ defaults write com.apple.finder ShowStatusBar -bool true
 # Show path bar
 defaults write com.apple.finder ShowPathbar -bool true
 
-# When performing a search, search the current folder by default
-defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
-
 # Keep folders on top when sorting by name
 defaults write com.apple.finder _FXSortFoldersFirst -bool true
-
-# Set 'home directory' as default, new window directory
-defaults write com.apple.finder NewWindowTarget -string "PfHm"
 
 # Disable showing tags
 defaults write com.apple.finder ShowRecentTags -int 0
@@ -48,9 +38,6 @@ defaults write com.apple.finder ShowHardDrivesOnDesktop -bool true
 defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
 defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
 
-# Finder: disable window animations and Get Info animations
-defaults write com.apple.finder DisableAllAnimations -bool true
-
 # Allow text selection in Quick Look
 defaults write com.apple.finder QLEnableTextSelection -bool true
 
@@ -69,9 +56,6 @@ defaults write com.apple.Safari ShowFavoritesBar -bool true
 
 # Show the full URL in the address bar (note: this still hides the scheme)
 defaults write com.apple.Safari ShowFullURLInSmartSearchField -bool true
-
-# Hide Safari’s sidebar in Top Sites
-defaults write com.apple.Safari ShowSidebarInTopSites -bool false
 
 # Enable Safari’s debug menu
 defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
@@ -104,9 +88,6 @@ defaults write com.apple.dock show-process-indicators -int 1
 
 # Change minimize/maximize window effect
 defaults write com.apple.dock mineffect -string "scale"
-
-# Disable double-click on window's title bar to minimize it
-defaults write NSGlobalDomain AppleActionOnDoubleClick None
 
 # Make Dock icons of hidden applications translucent
 defaults write com.apple.dock showhidden -bool true
@@ -155,13 +136,6 @@ defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
 # Disable smart quotes
 defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
 
-# Disable auto-correct
-# defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
-# defaults write NSGlobalDomain WebAutomaticSpellingCorrectionEnabled -int 0
-
-# Disable automatic capitalization
-# defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
-
 # Set a really fast key repeat
 defaults write NSGlobalDomain KeyRepeat -int 1
 defaults write NSGlobalDomain InitialKeyRepeat -int 15
@@ -178,14 +152,7 @@ defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 defaults write NSGlobalDomain AppleInterfaceStyle Dark
 
 # Set appearance color to graphite
-defaults write NSGlobalDomain AppleAquaColorVariant -int 6
-
-# Set highlight color to graphite
-defaults write NSGlobalDomain AppleHighlightColor -string "0.847059 0.847059 0.862745"
-
-# Only show scrollbars when scrolling
-# Possible values: `WhenScrolling`, `Automatic` and `Always`
-defaults write NSGlobalDomain AppleShowScrollBars -string "WhenScrolling"
+defaults write -g AppleAccentColor -integer 4
 
 ###############################################################################
 # Other stuff                                                                 #
@@ -202,38 +169,20 @@ defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
 
-# File save, save to disk by default rather than to iCloud
-defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
-
-# Disable opening and closing window animation
-defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -bool false
-
 # Text, spell checker automatically identifies languages
 defaults write NSGlobalDomain NSSpellCheckerAutomaticallyIdentifiesLanguages -bool true
 
 # Use plain text mode for new TextEdit documents
 defaults write com.apple.TextEdit RichText -int 0
 
-# Reset icons order in Dashboard
-defaults write com.apple.dock ResetLaunchPad -bool true
-
-# Show battery percentage in Menu Bar
-# defaults write com.apple.menuextra.battery ShowPercent YES
-
-# Close windows then quitting an app
-defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool true
-
 # Ask to keep change when closing documents
 defaults write NSGlobalDomain NSCloseAlwaysConfirmsChanges -bool true
 
 # Set alert sound
-defaults write NSGlobalDomain com.apple.sound.beep.sound -string "/System/Library/Sounds/Funk.aiff"
+# defaults write NSGlobalDomain com.apple.sound.beep.sound -string "/System/Library/Sounds/Funk.aiff"
 
 # Play feedback when volume is changed
 defaults write NSGlobalDomain com.apple.sound.beep.feedback -int 1
-
-# Set date format in menubar
-defaults write "com.apple.menuextra.clock" DateFormat -string "EEE MMM d  h:mm a"
 
 applications_to_kill=(
   "Activity Monitor"
