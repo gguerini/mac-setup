@@ -78,9 +78,7 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
-if which asdf > /dev/null; then echo -e "\n. $(brew --prefix asdf)/asdf.sh" >> ${ZDOTDIR:-~}/.zshrc; fi
+if which asdf > /dev/null; then eval ". $(brew --prefix asdf)/libexec/asdf.sh"; fi
 if which direnv > /dev/null; then eval "$(direnv hook zsh)"; fi
 
 # export MANPATH="/usr/local/man:$MANPATH"
