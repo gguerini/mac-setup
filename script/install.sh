@@ -57,6 +57,15 @@ sudo -v
 clear
 
 #----------------------------
+# Rosetta 2 (Apple Silicon)
+#----------------------------
+
+if [[ $(uname -m) == "arm64" ]]; then
+  echo "${ARROW} Apple Silicon detected. Installing Rosetta 2..."
+  softwareupdate --install-rosetta --agree-to-license
+fi
+
+#----------------------------
 # Homebrew
 #----------------------------
 
@@ -93,7 +102,6 @@ fi
 #----------------------------
 
 if $IS_HOMEBREW_INSTALLED; then
-  # read -p "${ARROW_YELLOW} Install dependencies (coreutils, curl, openssl and readline) via Homebrew? [y/n]: "
   echo -n "${ARROW_YELLOW} Install dependencies (coreutils, curl, openssl and readline) via Homebrew? [y/n]: "
   read REPLY
 
@@ -108,7 +116,6 @@ fi
 #----------------------------
 
 if $IS_HOMEBREW_INSTALLED; then
-  # read -p "${ARROW_YELLOW} Install latest Git version via Homebrew? [y/n]: "
   echo -n "${ARROW_YELLOW} Install latest Git version via Homebrew? [y/n]: "
   read REPLY
 
@@ -169,19 +176,21 @@ if $IS_HOMEBREW_INSTALLED; then
   fi
 fi
 
-
 #----------------------------
-# asdf & ruby-build
+# Version manager (asdf or mise)
 #----------------------------
 
 if $IS_HOMEBREW_INSTALLED; then
-  echo -n "${ARROW_YELLOW} Install asdf & ruby-build via Homebrew? [y/n]: "
+  echo -n "${ARROW_YELLOW} Install a Ruby version manager? [asdf/mise/n]: "
   read REPLY
 
-  if [[ "$REPLY" == "y" ]]; then
+  if [[ "$REPLY" == "asdf" ]]; then
     echo "${ARROW} Installing asdf & ruby-build..."
     brew install asdf
     asdf plugin-add ruby https://github.com/asdf-vm/asdf-ruby.git
+  elif [[ "$REPLY" == "mise" ]]; then
+    echo "${ARROW} Installing mise..."
+    brew install mise
   fi
 fi
 
@@ -192,13 +201,20 @@ fi
 if $IS_HOMEBREW_INSTALLED; then
   echo -n "${ARROW_YELLOW} Install applications via Homebrew Cask and Mac App Store? [y/n]: "
   read REPLY
-  # read -r
 
   if [[ "$REPLY" = "y" ]]; then
     echo -e "${RED}${BOLD}Important: Sign into the Mac App Store GUI app manually. Hit any key to continue. "
     read
-    echo "${ARROW} Installing applications..."
-    brew bundle
+
+    echo "${ARROW} Installing base packages..."
+    brew bundle --file="brewfiles/Brewfile"
+
+    for brewfile in brewfiles/Brewfile.*; do
+      group="${brewfile#brewfiles/Brewfile.}"
+      echo -n "${ARROW_YELLOW} Install $group apps? [y/n]: "
+      read REPLY
+      [[ "$REPLY" == "y" ]] && brew bundle --file="$brewfile"
+    done
   fi
 fi
 
@@ -271,6 +287,29 @@ if $IS_RECTANGLE_INSTALLED; then
     cp ~/Library/Preferences/com.knollsoft.Rectangle.plist ~/Library/Preferences/com.knollsoft.Rectangle.plist.mac_setup_backup 2> /dev/null
     cp -r rectangle.plist ~/Library/Preferences/com.knollsoft.Rectangle.plist 2> /dev/null
   fi
+fi
+
+#----------------------------
+# 1Password SSH agent
+#----------------------------
+
+echo -n "${ARROW_YELLOW} Configure 1Password SSH agent? [y/n]: "
+read REPLY
+
+if [[ "$REPLY" == "y" ]]; then
+  echo "${ARROW} Configuring 1Password SSH agent..."
+  mkdir -p ~/.ssh
+  SSH_CONFIG=~/.ssh/config
+  cp "$SSH_CONFIG" "${SSH_CONFIG}.mac_setup_backup" 2> /dev/null
+  if ! grep -q "IdentityAgent" "$SSH_CONFIG" 2>/dev/null; then
+    cat >> "$SSH_CONFIG" <<'EOF'
+
+Host *
+  IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+EOF
+    chmod 600 "$SSH_CONFIG"
+  fi
+  echo "${ARROW_GREEN} Done! Enable the SSH agent in 1Password: Settings > Developer > Use the SSH agent."
 fi
 
 #----------------------------
