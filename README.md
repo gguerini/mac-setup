@@ -121,7 +121,10 @@ Includes a set of aliases for common workflows:
 
 ### SSH via 1Password
 
-The installer can configure 1Password as your SSH agent — no key files on disk, protected by biometric unlock. Enable it in 1Password under **Settings > Developer > Use the SSH agent**.
+The installer can configure 1Password as your SSH agent — no key files on disk, protected by biometric unlock. The prompt only appears if 1Password is already installed. Before confirming, make sure you have:
+
+1. Opened 1Password and signed in
+2. Enabled the SSH agent under **Settings > Developer > Use the SSH agent**
 
 ---
 
