@@ -1,0 +1,3 @@
+cask "firefox"
+cask "google-chrome"
+cask "brave-browser"

@@ -1,0 +1,11 @@
+cask "alfred"
+cask "rectangle"
+cask "caffeine"
+cask "xbar"
+cask "appcleaner"
+
+mas "1Password", id: 1511601750
+mas "MeetingBar", id: 1532419400
+mas "Hidden Bar", id: 1452453066
+mas "Things", id: 904280696
+mas "Bumpr", id: 1166066070

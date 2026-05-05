@@ -1,0 +1,6 @@
+cask "cursor"
+cask "visual-studio-code"
+cask "github"
+cask "iterm2"
+cask "insomnia"
+cask "figma"
