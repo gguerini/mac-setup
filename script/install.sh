@@ -93,6 +93,13 @@ else
     echo "${ARROW} Installing Homebrew..."
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
+    # Add Homebrew to PATH for the remainder of this script
+    if [[ $(uname -m) == "arm64" ]]; then
+      eval "$(/opt/homebrew/bin/brew shellenv)"
+    else
+      eval "$(/usr/local/bin/brew shellenv)"
+    fi
+
     IS_HOMEBREW_INSTALLED=true
   fi
 fi
