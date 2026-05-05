@@ -98,20 +98,6 @@ else
 fi
 
 #----------------------------
-# Basic Dependencies
-#----------------------------
-
-if $IS_HOMEBREW_INSTALLED; then
-  echo -n "${ARROW_YELLOW} Install dependencies (coreutils, curl, openssl and readline) via Homebrew? [y/n]: "
-  read REPLY
-
-  if [[ "$REPLY" == "y" ]]; then
-    echo "${ARROW} Installing dependencies..."
-    brew install coreutils curl openssl readline
-  fi
-fi
-
-#----------------------------
 # Git
 #----------------------------
 
