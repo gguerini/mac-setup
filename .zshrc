@@ -79,6 +79,7 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 if which asdf > /dev/null; then eval ". $(brew --prefix asdf)/libexec/asdf.sh"; fi
+if which mise > /dev/null; then eval "$(mise activate zsh)"; fi
 if which direnv > /dev/null; then eval "$(direnv hook zsh)"; fi
 
 # export MANPATH="/usr/local/man:$MANPATH"

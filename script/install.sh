@@ -57,6 +57,32 @@ sudo -v
 clear
 
 #----------------------------
+# Rosetta 2 (Apple Silicon)
+#----------------------------
+
+if [[ $(uname -m) == "arm64" ]]; then
+  if /usr/bin/pgrep -q oahd; then
+    echo "${ARROW_GREEN} Rosetta 2 already installed!"
+  else
+    echo "${ARROW} Apple Silicon detected. Installing Rosetta 2..."
+    softwareupdate --install-rosetta --agree-to-license
+  fi
+fi
+
+#----------------------------
+# Xcode Command Line Tools
+#----------------------------
+
+if xcode-select -p &>/dev/null; then
+  echo "${ARROW_GREEN} Xcode Command Line Tools already installed!"
+else
+  echo "${ARROW} Installing Xcode Command Line Tools..."
+  xcode-select --install 2>/dev/null
+  echo -n "${ARROW_YELLOW} Follow the dialog to complete installation, then hit any key to continue..."
+  read
+fi
+
+#----------------------------
 # Homebrew
 #----------------------------
 
@@ -84,22 +110,14 @@ else
     echo "${ARROW} Installing Homebrew..."
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
+    # Add Homebrew to PATH for the remainder of this script
+    if [[ $(uname -m) == "arm64" ]]; then
+      eval "$(/opt/homebrew/bin/brew shellenv)"
+    else
+      eval "$(/usr/local/bin/brew shellenv)"
+    fi
+
     IS_HOMEBREW_INSTALLED=true
-  fi
-fi
-
-#----------------------------
-# Basic Dependencies
-#----------------------------
-
-if $IS_HOMEBREW_INSTALLED; then
-  # read -p "${ARROW_YELLOW} Install dependencies (coreutils, curl, openssl and readline) via Homebrew? [y/n]: "
-  echo -n "${ARROW_YELLOW} Install dependencies (coreutils, curl, openssl and readline) via Homebrew? [y/n]: "
-  read REPLY
-
-  if [[ "$REPLY" == "y" ]]; then
-    echo "${ARROW} Installing dependencies..."
-    brew install coreutils curl openssl readline
   fi
 fi
 
@@ -108,7 +126,6 @@ fi
 #----------------------------
 
 if $IS_HOMEBREW_INSTALLED; then
-  # read -p "${ARROW_YELLOW} Install latest Git version via Homebrew? [y/n]: "
   echo -n "${ARROW_YELLOW} Install latest Git version via Homebrew? [y/n]: "
   read REPLY
 
@@ -169,19 +186,21 @@ if $IS_HOMEBREW_INSTALLED; then
   fi
 fi
 
-
 #----------------------------
-# asdf & ruby-build
+# Version manager (asdf or mise)
 #----------------------------
 
 if $IS_HOMEBREW_INSTALLED; then
-  echo -n "${ARROW_YELLOW} Install asdf & ruby-build via Homebrew? [y/n]: "
+  echo -n "${ARROW_YELLOW} Install a Ruby version manager? [asdf/mise/n]: "
   read REPLY
 
-  if [[ "$REPLY" == "y" ]]; then
+  if [[ "$REPLY" == "asdf" ]]; then
     echo "${ARROW} Installing asdf & ruby-build..."
     brew install asdf
     asdf plugin-add ruby https://github.com/asdf-vm/asdf-ruby.git
+  elif [[ "$REPLY" == "mise" ]]; then
+    echo "${ARROW} Installing mise..."
+    brew install mise
   fi
 fi
 
@@ -192,13 +211,20 @@ fi
 if $IS_HOMEBREW_INSTALLED; then
   echo -n "${ARROW_YELLOW} Install applications via Homebrew Cask and Mac App Store? [y/n]: "
   read REPLY
-  # read -r
 
   if [[ "$REPLY" = "y" ]]; then
     echo -e "${RED}${BOLD}Important: Sign into the Mac App Store GUI app manually. Hit any key to continue. "
     read
-    echo "${ARROW} Installing applications..."
-    brew bundle
+
+    echo "${ARROW} Installing base packages..."
+    brew bundle --file="brewfiles/Brewfile"
+
+    for brewfile in brewfiles/Brewfile.*; do
+      group="${brewfile#brewfiles/Brewfile.}"
+      echo -n "${ARROW_YELLOW} Install $group apps? [y/n]: "
+      read REPLY
+      [[ "$REPLY" == "y" ]] && brew bundle --file="$brewfile"
+    done
   fi
 fi
 
