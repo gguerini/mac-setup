@@ -1,5 +1,4 @@
 cask "slack"
 
 mas "ChatGPT", id: 6448311069
-mas "WhatsApp", id: 310633997
 mas "Claude", id: 6473753684
