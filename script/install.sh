@@ -61,8 +61,12 @@ clear
 #----------------------------
 
 if [[ $(uname -m) == "arm64" ]]; then
-  echo "${ARROW} Apple Silicon detected. Installing Rosetta 2..."
-  softwareupdate --install-rosetta --agree-to-license
+  if /usr/bin/pgrep -q oahd; then
+    echo "${ARROW_GREEN} Rosetta 2 already installed!"
+  else
+    echo "${ARROW} Apple Silicon detected. Installing Rosetta 2..."
+    softwareupdate --install-rosetta --agree-to-license
+  fi
 fi
 
 #----------------------------
