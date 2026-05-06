@@ -300,31 +300,6 @@ if $IS_RECTANGLE_INSTALLED; then
 fi
 
 #----------------------------
-# 1Password SSH agent
-#----------------------------
-
-if [ -d "/Applications/1Password.app" ]; then
-  echo -n "${ARROW_YELLOW} Configure 1Password SSH agent? (requires 1Password to be signed in and SSH agent enabled in Settings > Developer) [y/n]: "
-  read REPLY
-
-  if [[ "$REPLY" == "y" ]]; then
-    echo "${ARROW} Configuring 1Password SSH agent..."
-    mkdir -p ~/.ssh
-    SSH_CONFIG=~/.ssh/config
-    cp "$SSH_CONFIG" "${SSH_CONFIG}.mac_setup_backup" 2> /dev/null
-    if ! grep -q "IdentityAgent" "$SSH_CONFIG" 2>/dev/null; then
-      cat >> "$SSH_CONFIG" <<'EOF'
-
-Host *
-  IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
-EOF
-      chmod 600 "$SSH_CONFIG"
-    fi
-    echo "${ARROW_GREEN} Done! Make sure the SSH agent is enabled in 1Password: Settings > Developer > Use the SSH agent."
-  fi
-fi
-
-#----------------------------
 # Computer name
 #----------------------------
 
