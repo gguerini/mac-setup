@@ -66,6 +66,19 @@ if [[ $(uname -m) == "arm64" ]]; then
 fi
 
 #----------------------------
+# Xcode Command Line Tools
+#----------------------------
+
+if xcode-select -p &>/dev/null; then
+  echo "${ARROW_GREEN} Xcode Command Line Tools already installed!"
+else
+  echo "${ARROW} Installing Xcode Command Line Tools..."
+  xcode-select --install 2>/dev/null
+  echo -n "${ARROW_YELLOW} Follow the dialog to complete installation, then hit any key to continue..."
+  read
+fi
+
+#----------------------------
 # Homebrew
 #----------------------------
 
